@@ -1,21 +1,16 @@
 import streamlit as st
 from rag_pipeline import load_vectorstore, generate_answer
 
-st.set_page_config(page_title="RAG Q&A", layout="wide")
+@st.cache_resource
+def get_vectorstore():
+    return load_vectorstore()
 
-st.title("📚 RAG Q&A System")
+st.title("📚 RAG Q&A")
 
-query = st.text_input("Enter your question:")
+query = st.text_input("Ask something")
 
 if st.button("Ask"):
-    if query:
-        vectorstore = load_vectorstore()
+    with st.spinner("Processing..."):
+        vectorstore = get_vectorstore()
         answer = generate_answer(query, vectorstore)
-
-        st.subheader("Answer")
         st.write(answer)
-@st.cache_resource
-def load_cached_vectorstore():
-    from rag_pipeline import load_vectorstore
-    return load_vectorstore()
-vectorstore = load_cached_vectorstore()
