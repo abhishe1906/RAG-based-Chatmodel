@@ -33,7 +33,12 @@ def load_vectorstore():
 FAISS_PATH = "faiss_index"
 MODEL_NAME = "all-MiniLM-L6-v2"
 
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+api_key = os.getenv("GROQ_API_KEY")
+
+if not api_key:
+    raise ValueError("GROQ_API_KEY not set")
+
+client = Groq(api_key=api_key)
 
 def clean_text(text):
     text = text.replace("\n", " ")
