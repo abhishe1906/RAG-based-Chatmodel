@@ -1,6 +1,6 @@
 import streamlit as st
 from rag_pipeline import load_vectorstore, generate_answer
-
+import os
 st.title("📚 RAG Q&A System")
 
 query = st.text_input("Enter your question:")
