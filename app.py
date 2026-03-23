@@ -14,3 +14,8 @@ if st.button("Ask"):
 
         st.subheader("Answer")
         st.write(answer)
+@st.cache_resource
+def load_cached_vectorstore():
+    from RAG2(1) import load_vectorstore
+    return load_vectorstore()
+vectorstore = load_cached_vectorstore()
