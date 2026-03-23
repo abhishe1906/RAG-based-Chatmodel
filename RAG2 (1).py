@@ -17,7 +17,7 @@ PDF_PATH = download_from_s3("https://drive.google.com/file/d/1giKrO3sTCguTiKKMZu
 FAISS_PATH = "faiss_index"
 MODEL_NAME = "all-MiniLM-L6-v2"
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 def clean_text(text):
     text = text.replace("\n", " ")
