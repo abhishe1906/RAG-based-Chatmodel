@@ -52,9 +52,10 @@ def is_valid(text):
     if text.count("...") > 2:
         return False
     return True
-def load_documents():
+def load_documents(pdf_path):
     documents = []
-    with fitz.open(PDF_PATH) as pdf:
+
+    with fitz.open(pdf_path) as pdf:
         for i, page in enumerate(pdf):
             if i < 14:
                 continue
@@ -78,8 +79,8 @@ def split_documents(docs):
 
     chunks = splitter.split_documents(docs)
     return [c for c in chunks if is_valid(c.page_content)]
-def create_vectorstore():
-    docs = load_documents()
+def create_vectorstore(pdf_path):
+    docs = load_documents(pdf_path)
     chunks = split_documents(docs)
 
     model = SentenceTransformer(MODEL_NAME)
@@ -95,8 +96,10 @@ def create_vectorstore():
     return vectorstore
 
 def load_vectorstore():
+    pdf_path = download_pdf()   # ✅ define here
+
     if not os.path.exists(FAISS_PATH):
-        return create_vectorstore()
+        return create_vectorstore(pdf_path)
 
     model = SentenceTransformer(MODEL_NAME)
     return FAISS.load_local(
