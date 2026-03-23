@@ -97,6 +97,7 @@ def create_vectorstore(pdf_path):
 
 def load_vectorstore():
     pdf_path = download_pdf()
+    from langchain_community.embeddings import HuggingFaceEmbeddings
     embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
 
     if not os.path.exists(FAISS_PATH):
