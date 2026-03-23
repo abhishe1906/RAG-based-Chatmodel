@@ -96,18 +96,17 @@ def create_vectorstore(pdf_path):
     return vectorstore
 
 def load_vectorstore():
-    pdf_path = download_pdf()   # ✅ define here
+    pdf_path = download_pdf()
+    embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
 
     if not os.path.exists(FAISS_PATH):
         return create_vectorstore(pdf_path)
 
-    embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
-
-return FAISS.load_local(
-    FAISS_PATH,
-    embedding_model,
-    allow_dangerous_deserialization=True
-)
+    return FAISS.load_local(
+        FAISS_PATH,
+        embedding_model,
+        allow_dangerous_deserialization=True
+    )
 def generate_answer(query, vectorstore):
     retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
     docs = retriever.invoke(query)
