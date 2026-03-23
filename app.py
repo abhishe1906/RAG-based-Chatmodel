@@ -10,3 +10,4 @@ if st.button("Ask"):
         vectorstore = load_vectorstore()   # ✅ ONLY here
         answer = generate_answer(query, vectorstore)
         st.write(answer)
+os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
