@@ -16,6 +16,6 @@ if st.button("Ask"):
         st.write(answer)
 @st.cache_resource
 def load_cached_vectorstore():
-    from RAG2(1) import load_vectorstore
+    from rag_pipeline import load_vectorstore
     return load_vectorstore()
 vectorstore = load_cached_vectorstore()
