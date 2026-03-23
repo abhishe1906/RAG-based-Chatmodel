@@ -108,9 +108,6 @@ Question:
 
     return response.choices[0].message.content
 
-@st.cache_resource
-def load_cached_vectorstore():
-    return load_vectorstore()
 
 
 
