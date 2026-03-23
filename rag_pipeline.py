@@ -12,8 +12,21 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from sentence_transformers import SentenceTransformer
 from groq import Groq
+import gdown
 
-PDF_PATH = download_from_s3("https://drive.google.com/file/d/1giKrO3sTCguTiKKMZuTGdgVHPpHm5TJW/view?usp=sharing")
+def download_pdf():
+    file_id = "1giKrO3sTCguTiKKMZuTGdgVHPpHm5TJW"
+    output_path = "data/book.pdf"
+
+    os.makedirs("data", exist_ok=True)
+
+    if not os.path.exists(output_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, output_path, quiet=False)
+
+    return output_path
+
+PDF_PATH = download_pdf()
 FAISS_PATH = "faiss_index"
 MODEL_NAME = "all-MiniLM-L6-v2"
 
