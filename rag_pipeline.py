@@ -84,15 +84,15 @@ def create_vectorstore(pdf_path):
     chunks = split_documents(docs)
 
     from langchain_community.embeddings import HuggingFaceEmbeddings
+    embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
 
-embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
+    vectorstore = FAISS.from_documents(
+        chunks,
+        embedding_model
+    )
 
-vectorstore = FAISS.from_documents(
-    chunks,
-    embedding_model
-)
+    vectorstore.save_local(FAISS_PATH)
 
- vectorstore.save_local(FAISS_PATH)
     return vectorstore
 
 def load_vectorstore():
