@@ -1,6 +1,7 @@
 streamlit
 pymupdf
 langchain
+langchain-text-splitters
 faiss-cpu
 sentence-transformers
 groq
