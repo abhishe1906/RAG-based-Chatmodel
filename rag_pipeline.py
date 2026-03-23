@@ -68,7 +68,7 @@ def load_documents():
 def split_documents(docs):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=300,
-        chunk_overlap=100
+        chunk_overlap=50
     )
 
     chunks = splitter.split_documents(docs)
@@ -100,7 +100,7 @@ def load_vectorstore():
         allow_dangerous_deserialization=True
     )
 def generate_answer(query, vectorstore):
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
     docs = retriever.invoke(query)
 
     context = "\n\n".join([doc.page_content for doc in docs])
