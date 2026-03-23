@@ -6,7 +6,7 @@ An end-to-end **Retrieval-Augmented Generation (RAG)** application that allows u
 
 ## 🚀 Live Demo
 
-👉 [Add your Streamlit App Link here]
+👉 https://rag-based-chatmodel-benfumnrc6bezqhqi4a9gu.streamlit.app/
 
 ---
 
