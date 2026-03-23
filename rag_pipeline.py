@@ -83,14 +83,14 @@ def create_vectorstore(pdf_path):
     docs = load_documents(pdf_path)
     chunks = split_documents(docs)
 
-    model = SentenceTransformer(MODEL_NAME)
-    texts = [doc.page_content for doc in chunks]
-    embeddings = model.encode(texts, show_progress_bar=True)
+    from langchain_community.embeddings import HuggingFaceEmbeddings
 
-    vectorstore = FAISS.from_embeddings(
-        embeddings,
-        chunks
-    )
+embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
+
+vectorstore = FAISS.from_documents(
+    chunks,
+    embedding_model
+)
 
     vectorstore.save_local(FAISS_PATH)
     return vectorstore
@@ -101,12 +101,13 @@ def load_vectorstore():
     if not os.path.exists(FAISS_PATH):
         return create_vectorstore(pdf_path)
 
-    model = SentenceTransformer(MODEL_NAME)
-    return FAISS.load_local(
-        FAISS_PATH,
-        model,
-        allow_dangerous_deserialization=True
-    )
+    embedding_model = HuggingFaceEmbeddings(model_name=MODEL_NAME)
+
+return FAISS.load_local(
+    FAISS_PATH,
+    embedding_model,
+    allow_dangerous_deserialization=True
+)
 def generate_answer(query, vectorstore):
     retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
     docs = retriever.invoke(query)
