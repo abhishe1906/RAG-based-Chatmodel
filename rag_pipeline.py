@@ -25,8 +25,11 @@ def download_pdf():
         gdown.download(url, output_path, quiet=False)
 
     return output_path
-
-PDF_PATH = download_pdf()
+def load_vectorstore():
+    PDF_PATH = download_pdf()
+    
+    if not os.path.exists(FAISS_PATH):
+        return create_vectorstore(PDF_PATH)
 FAISS_PATH = "faiss_index"
 MODEL_NAME = "all-MiniLM-L6-v2"
 
