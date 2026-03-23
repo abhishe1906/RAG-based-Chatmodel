@@ -92,7 +92,7 @@ vectorstore = FAISS.from_documents(
     embedding_model
 )
 
-    vectorstore.save_local(FAISS_PATH)
+ vectorstore.save_local(FAISS_PATH)
     return vectorstore
 
 def load_vectorstore():
