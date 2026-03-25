@@ -109,7 +109,7 @@ def load_vectorstore():
         allow_dangerous_deserialization=True
     )
 def generate_answer(query, vectorstore):
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
     docs = retriever.invoke(query)
 
     context = "\n\n".join([doc.page_content for doc in docs])
@@ -117,7 +117,9 @@ def generate_answer(query, vectorstore):
     prompt = f"""
 You are a precise AI tutor.
 Answer ONLY from the context below.
-If not found, say "Not found in provided material".
+If not found, say "Based on the provided material my scope is limited".
+Don't say above line if you found even small context.
+Use informal language in your answer like"bro","dude".
 
 Context:
 {context}
