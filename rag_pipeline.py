@@ -73,8 +73,8 @@ def load_documents(pdf_path):
     return documents
 def split_documents(docs):
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=50
+        chunk_size=400,
+        chunk_overlap=75
     )
 
     chunks = splitter.split_documents(docs)
@@ -119,7 +119,7 @@ You are a precise AI tutor.
 Answer ONLY from the context below.
 If not found, say "Based on the provided material my scope is limited".
 Don't say above line if you found even small context.
-Use informal language in your answer like"bro","dude".
+Use informal language in your answer like"bro","dude" 1 to 3 times in your response.
 
 Context:
 {context}
