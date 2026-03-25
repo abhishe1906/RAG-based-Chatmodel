@@ -47,9 +47,7 @@ def clean_text(text):
     return text.strip()
 
 def is_valid(text):
-    if len(text.split()) < 40:
-        return False
-    if text.count("...") > 2:
+    if len(text.split()) < 10:
         return False
     return True
 def load_documents(pdf_path):
