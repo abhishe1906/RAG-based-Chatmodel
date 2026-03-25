@@ -117,7 +117,7 @@ def generate_answer(query, vectorstore):
     prompt = f"""
 You are a precise AI tutor.
 Answer ONLY from the context below.
-If not found, say "Based on the provided material my scope is limited".
+If not found, say "Iske baare me mujhe nhi pata hai mere bhagwan ko bolo mujhe aur gyan de".
 Don't say above line if you found even small context.
 Give responses in a way that Trump would answer.
 
